@@ -2,9 +2,10 @@
 
 ## Prerequisites
 
-- PyPI token with publish access for `taxgrok`.
 - Clean working tree.
 - Passing local tests.
+- GitHub repo admin access.
+- PyPI project owner/maintainer access.
 
 ## Release steps
 
@@ -17,8 +18,9 @@
 3. Run local quality gates:
 
 ```bash
+python3 -m pip install ruff build twine
+ruff check .
 python3 -m unittest discover -s tests -v
-python3 -m pip install build twine
 python3 -m build
 python3 -m twine check dist/*
 ```
@@ -43,8 +45,11 @@ git push origin main --tags
 6. Publish to PyPI:
 
 ```bash
-python3 -m twine upload dist/*
+gh release create v0.1.1 --title "taxgrok v0.1.1" --notes-file CHANGELOG.md
 ```
+
+Publishing happens automatically when the GitHub release is published via
+`.github/workflows/pypi-publish.yml` using PyPI Trusted Publishing (OIDC).
 
 7. Verify install:
 
@@ -54,6 +59,32 @@ source /tmp/taxgrok-release-check/bin/activate
 pip install taxgrok
 taxgrok --help
 ```
+
+## One-time GitHub hardening setup
+
+1. Branch protection (`main`)
+- Require pull request before merging.
+- Require status checks to pass before merging.
+- Select required checks from CI + security workflows:
+  - `CI / test (3.9)`
+  - `CI / test (3.10)`
+  - `CI / test (3.11)`
+  - `CI / test (3.12)`
+  - `Secret Scan / Gitleaks`
+- Require conversation resolution before merging.
+- Restrict force pushes and branch deletion.
+
+2. Security settings
+- Enable Dependabot alerts.
+- Enable Dependabot security updates.
+- Enable secret scanning and push protection (when available for the repo plan).
+
+3. PyPI Trusted Publisher
+- In PyPI project settings, add a trusted publisher with:
+  - Owner: `lalomorales22`
+  - Repository: `taxgrok`
+  - Workflow: `.github/workflows/pypi-publish.yml`
+  - Environment: `pypi`
 
 ## Rollback / mitigation
 

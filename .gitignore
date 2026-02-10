@@ -1,0 +1,23 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+dist/
+build/
+.env
+.env.*
+!.env.example
+*.log
+TAXGROK-*.md
+
+# Local user tax data (do not commit)
+morales-taxes-2025/
+user-docs/
+reports/
+
+# Common secret/key files
+*.pem
+*.key
+*.p12

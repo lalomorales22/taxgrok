@@ -5,7 +5,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="taxgrok",
-    version="0.1.1",
+    version="0.1.2",
     description="Local CLI tax-prep briefing tool powered by xAI + RAG",
     long_description=Path("README.md").read_text(encoding="utf-8"),
     long_description_content_type="text/markdown",

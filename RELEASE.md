@@ -36,16 +36,17 @@ git ls-files --error-unmatch .env >/dev/null 2>&1 && { echo "ERROR: .env is trac
 5. Commit + tag release:
 
 ```bash
+VERSION=0.1.2
 git add .
-git commit -m "release: 0.1.1"
-git tag -a v0.1.1 -m "taxgrok v0.1.1"
+git commit -m "release: ${VERSION}"
+git tag -a "v${VERSION}" -m "taxgrok v${VERSION}"
 git push origin main --tags
 ```
 
 6. Publish to PyPI:
 
 ```bash
-gh release create v0.1.1 --title "taxgrok v0.1.1" --notes-file CHANGELOG.md
+gh release create "v${VERSION}" --title "taxgrok v${VERSION}" --notes-file CHANGELOG.md
 ```
 
 Publishing happens automatically when the GitHub release is published via

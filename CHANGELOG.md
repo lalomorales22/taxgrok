@@ -20,6 +20,23 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Low-quality scanned PDFs now fall back to original-PDF upload for retrieval if OCR fallback text is still insufficient.
 
+## [0.1.2] - 2026-02-11
+
+### Added
+- MIT `LICENSE` file in repository root.
+- Dependabot configuration for weekly Python and GitHub Actions updates.
+- GitHub workflows for PyPI Trusted Publishing and repository secret scanning.
+
+### Changed
+- GitHub Actions dependencies updated:
+  - `actions/checkout` from `v4` to `v6`
+  - `actions/setup-python` from `v5` to `v6`
+  - `actions/upload-artifact` from `v4` to `v6`
+  - `actions/download-artifact` from `v4` to `v7`
+
+### Fixed
+- Secret scanning workflow now passes `GITHUB_TOKEN` to `gitleaks-action@v2` for pull request runs.
+
 ## [0.1.1] - 2026-02-10
 
 ### Added

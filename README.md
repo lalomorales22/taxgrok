@@ -126,7 +126,41 @@ Phases 1, 2, 3, and 4 are implemented:
 - PII-safe logging filter for runtime logs.
 - Expanded unit/integration tests and CI workflow for lint/test/package checks.
 
-## Quickstart (local development)
+## Quickstart (PHP Dashboard Integration)
+
+The `solana-tax-tracker` directory houses the unified PHP dashboard for tracking Solana activity and analyzing tax documents with `taxgrok`.
+
+**⚠️ Important:** The web dashboard *requires* the `taxgrok` python module to be installed on your machine so it can execute the xAI analysis pipeline in the background.
+
+1. Create a `.env` file in the `solana-tax-tracker` directory and add your API keys:
+   ```ini
+   HELIUS_API_KEY="your_helius_key_here"  # Get a free key from helius.dev
+   XAI_API_KEY="your_xai_key_here"        # Used as a fallback if not provided in the UI
+   ```
+2. Create and activate a virtual environment in the root directory and install `taxgrok`:
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   pip install .
+   ```
+3. Boot up the PHP development server inside the `solana-tax-tracker` directory:
+   ```bash
+   cd solana-tax-tracker
+   php -S localhost:8000
+   ```
+4. Access the dashboard at `http://localhost:8000`. 
+   The database (`soltracker.db`) will instantiate automatically on your first visit.
+
+## Solana Tax Tracker UI Features
+When running the integrated tracker UI you'll have access to:
+- **Taxgrok AI Dashboard** — Simply upload your `.pdf` or `.png` tax forms right from the browser. Provide your `console.x.ai` API Key, filing status, and it dynamically generates a beautifully formatted markdown brief offering refund estimates and checklist points using xAI's visual and text reasoning models. Click **"Export PDF"** to produce a clean printable document.
+- **Solana Multi-Wallet Tracking** — Add unlimited Solana wallet addresses. Click the sync button to pull parsed historical transaction data (Swaps, Transfers, NFT mints/sales) via the Helius RPC.
+- **Local SQLite Persistence** — All your crypto transaction data and wallet labels are stored privately and safely on your local `soltracker.db` ledger.
+- **CSV Export Engine** — Instantly filter your transaction ledgers and export them natively to CSV for handing off to TurboTax or your tax professional.
+
+## Quickstart (Terminal CLI Only)
+
+If you prefer operating without the Web UI:
 
 1. Create and activate a virtual environment.
 2. Install the project.
@@ -239,6 +273,14 @@ Interactive run behavior:
 
 5. Estimate strictness
 - Report provides rough expectation ranges and qualitative drivers only, with explicit disclaimer.
+
+## Tech Stack & Dependencies
+
+- **Python 3.9+** — The powerful CLI analysis tool integrating `pypdf` for PII redaction and inference interactions.
+- **PHP 8.0+** — Single file web-app architecture powering the Solana Tracker and executing the Python suite natively.
+- **SQLite** — Embedded zero-config offline wallet ledgering.
+- **Helius API** — Parsing Solana transactions.
+- **xAI RAG API** — Analyzing visual tax data natively.
 
 ## References used for planning
 

@@ -90,7 +90,11 @@ def write_phase3_report(
         lines.append("")
 
         _append_list(lines, "## Missing information before filing", guidance.missing_information)
-        _append_list(lines, "## Follow-up questions", guidance.follow_up_questions)
+        
+        lines.append("## Estimated 2025 Refund / Owed")
+        lines.append(f"{guidance.estimated_2025_refund_or_owed}")
+        lines.append("")
+        
         _append_list(lines, "## Assumptions used", guidance.assumptions)
         _append_list(lines, "## Citation notes", guidance.citation_notes)
         disclaimer = guidance.disclaimer

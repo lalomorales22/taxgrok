@@ -21,7 +21,7 @@ class TaxGuidance:
     rough_expectation_drivers: list[str]
     confidence_level: str
     missing_information: list[str]
-    follow_up_questions: list[str]
+    estimated_2025_refund_or_owed: str
     assumptions: list[str]
     citation_notes: list[str]
     disclaimer: str
@@ -92,7 +92,7 @@ def parse_tax_guidance(raw_text: str) -> TaxGuidance:
         rough_expectation_drivers=_clean_str_list(payload.get("rough_expectation_drivers")),
         confidence_level=confidence_level or "low",
         missing_information=_clean_str_list(payload.get("missing_information")),
-        follow_up_questions=_clean_str_list(payload.get("follow_up_questions")),
+        estimated_2025_refund_or_owed=str(payload.get("estimated_2025_refund_or_owed", "")).strip() or "Rough estimate unavailable from source data.",
         assumptions=_clean_str_list(payload.get("assumptions")),
         citation_notes=_clean_str_list(payload.get("citation_notes")),
         disclaimer=disclaimer or "This is rough educational guidance, not tax/legal/financial advice.",

@@ -16,6 +16,8 @@ TAXGROK-*.md
 morales-taxes-2025/
 user-docs/
 reports/
+*.db
+*.pdf
 
 # Common secret/key files
 *.pem

@@ -183,6 +183,8 @@ def _looks_like_files_api_acl_failure(message: str) -> bool:
             "not allowed",
             "unauthorized",
             "access denied",
+            "incorrect api key",
+            "invalid api key",
         )
     )
 
@@ -201,6 +203,8 @@ def _looks_like_permission_failure(message: str) -> bool:
             "unauthorized",
             "access denied",
             "doesn't have permission",
+            "incorrect api key",
+            "invalid api key",
         )
     )
 
@@ -329,11 +333,7 @@ def _build_local_heuristic_guidance(extracted_documents: list[ExtractedDocument]
             "Full filing-status, dependents, and credit-eligibility inputs.",
             "Exact year-specific values needed for a reliable estimate.",
         ],
-        follow_up_questions=[
-            "Do you have any additional 1099, K-1, or other income forms?",
-            "Are there credits/deductions (education, childcare, retirement, etc.) not represented here?",
-            "Was any estimated federal tax paid outside withholding?",
-        ],
+        estimated_2025_refund_or_owed="Local heuristic mode cannot calculate a detailed estimate. Missing full context.",
         assumptions=[
             "Federal filing scope only.",
             "Uploaded files are representative but may be incomplete.",

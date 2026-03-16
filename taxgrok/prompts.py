@@ -27,7 +27,7 @@ def build_tax_system_prompt(
         "Style: practical, concise, actionable checklists.\n"
         "Safety: this is rough educational guidance, not legal/tax/financial advice.\n"
         "Never claim certainty when source info is missing.\n"
-        "Explicitly list unknowns and follow-up questions.\n"
+        "Explicitly list unknowns. Do NOT ask any follow-up questions; try to estimate directly from available facts.\n"
         "Do not fabricate IRS rules, thresholds, or forms.\n"
         "Only produce the JSON object schema requested by the user prompt.\n"
         "Use rough expectation language (likely, possible, estimated) for refund/payment outcomes.\n"
@@ -52,7 +52,7 @@ def build_tax_user_prompt() -> str:
         '  "rough_expectation_drivers": ["..."],\n'
         '  "confidence_level": "low|medium|high",\n'
         '  "missing_information": ["..."],\n'
-        '  "follow_up_questions": ["..."],\n'
+        '  "estimated_2025_refund_or_owed": "...",\n'
         '  "assumptions": ["..."],\n'
         '  "citation_notes": ["filename: short note"],\n'
         '  "disclaimer": "..."'
